@@ -14,10 +14,10 @@ export const metadata: Metadata = {
   description:
     "Domine a Inteligência Artificial: Do básico ao avançado com projetos práticos e mentoria especializada.",
   icons: {
-    icon: faviconUrl, // Favicon dinâmico via variável de ambiente
-  },,
+    icon: faviconUrl,
+  },
   // Outros metadados podem ser adicionados aqui
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({

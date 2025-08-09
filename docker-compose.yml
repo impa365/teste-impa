@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+  teste-impa:
+    image: impa365/teste-impa:latest
+    networks:
+      - ImpaServer
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # Variáveis usadas na aplicação (página/manifest/layout)
+      - SALES_PAGE_COURSE_NAME=Curso de Inteligência Artificial Avançada
+      - SALES_PAGE_LOGO_URL=/placeholder.svg?height=32&width=32
+      - SALES_PAGE_HERO_IMAGE_URL=/placeholder.svg?height=800&width=1200
+      - SALES_PAGE_FAVICON_URL=/placeholder.svg?height=32&width=32
+      # Caso precise expor no cliente Next.js, considere NEXT_PUBLIC_*
+      # - NEXT_PUBLIC_SALES_PAGE_COURSE_NAME=
+      # - NEXT_PUBLIC_SALES_PAGE_LOGO_URL=
+      # - NEXT_PUBLIC_SALES_PAGE_HERO_IMAGE_URL=
+      # - NEXT_PUBLIC_SALES_PAGE_FAVICON_URL=
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2048M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      labels:
+        - "traefik.enable=true"
+        # Router (ajuste o domínio abaixo)
+        - "traefik.http.routers.teste_impa_router.rule=Host(`SEU_DOMINIO_AQUI`)"
+        - "traefik.http.routers.teste_impa_router.entrypoints=websecure"
+        - "traefik.http.routers.teste_impa_router.tls=true"
+        - "traefik.http.routers.teste_impa_router.tls.certresolver=letsencryptresolver"
+        # Service apontando para a porta interna do Next.js standalone
+        - "traefik.http.services.teste_impa_service.loadbalancer.server.port=3000"
+        - "traefik.http.services.teste_impa_service.loadbalancer.passHostHeader=true"
+        # Bind router->service e rede usada pelo Traefik
+        - "traefik.http.routers.teste_impa_router.service=teste_impa_service"
+        - "traefik.docker.network=ImpaServer"
+
+networks:
+  ImpaServer:
+    external: true
+    name: ImpaServer 
