@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: process.env.SALES_PAGE_COURSE_NAME || "Curso de IA",
+    name: process.env.SALES_PAGE_COURSE_NAME ?? "", // será validado no entrypoint
     short_name: "CursoIA",
     description: "Domine a Inteligência Artificial com nosso curso avançado.",
     start_url: "/",

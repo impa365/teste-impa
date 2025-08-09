@@ -9,10 +9,10 @@ services:
       - NODE_ENV=production
       - PORT=3000
       # Variáveis usadas na aplicação (página/manifest/layout)
-      - SALES_PAGE_COURSE_NAME=Curso de Inteligência Artificial Avançada
-      - SALES_PAGE_LOGO_URL=/placeholder.svg?height=32&width=32
-      - SALES_PAGE_HERO_IMAGE_URL=/placeholder.svg?height=800&width=1200
-      - SALES_PAGE_FAVICON_URL=/placeholder.svg?height=32&width=32
+      - SALES_PAGE_COURSE_NAME=Curso Impa de I.a
+      - SALES_PAGE_LOGO_URL=https://comunidade.impa365.com/wp-content/uploads/fluent-community/fluentcom-e524efbc31bdc0658868222b60d42b2b-fluentcom-imagem_2025-04-29_155421934.png
+      - SALES_PAGE_HERO_IMAGE_URL=https://comunidade.impa365.com/wp-content/uploads/fluent-community/fluentcom-e524efbc31bdc0658868222b60d42b2b-fluentcom-imagem_2025-04-29_155421934.png
+      - SALES_PAGE_FAVICON_URL=https://comunidade.impa365.com/wp-content/uploads/fluent-community/fluentcom-e524efbc31bdc0658868222b60d42b2b-fluentcom-imagem_2025-04-29_155421934.png
       # Caso precise expor no cliente Next.js, considere NEXT_PUBLIC_*
       # - NEXT_PUBLIC_SALES_PAGE_COURSE_NAME=
       # - NEXT_PUBLIC_SALES_PAGE_LOGO_URL=
@@ -35,7 +35,7 @@ services:
       labels:
         - "traefik.enable=true"
         # Router (ajuste o domínio abaixo)
-        - "traefik.http.routers.teste_impa_router.rule=Host(`SEU_DOMINIO_AQUI`)"
+        - "traefik.http.routers.teste_impa_router.rule=Host(`pageteste.impa365.space`)"
         - "traefik.http.routers.teste_impa_router.entrypoints=websecure"
         - "traefik.http.routers.teste_impa_router.tls=true"
         - "traefik.http.routers.teste_impa_router.tls.certresolver=letsencryptresolver"

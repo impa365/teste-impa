@@ -6,19 +6,20 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Input } from "@/components/ui/input"
 import { CheckCircle, Lightbulb, Users, Code, DollarSign, Star } from "lucide-react"
 
-// Acessa as variáveis de ambiente diretamente no Server Component
-const courseName = process.env.SALES_PAGE_COURSE_NAME || "Curso de Inteligência Artificial Avançada"
-const logoUrl = process.env.SALES_PAGE_LOGO_URL || "/placeholder.svg?height=32&width=32"
-const heroImageUrl = process.env.SALES_PAGE_HERO_IMAGE_URL || "/placeholder.svg?height=800&width=1200"
+import { requireEnv } from "@/lib/ensure-env"
+export const dynamic = 'force-dynamic'
 
 export default function AISalesPage() {
+  const courseName = requireEnv("SALES_PAGE_COURSE_NAME")
+  const logoUrl = requireEnv("SALES_PAGE_LOGO_URL")
+  const heroImageUrl = requireEnv("SALES_PAGE_HERO_IMAGE_URL")
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-gray-950 to-black text-gray-50">
       {/* Header */}
       <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b border-gray-800">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={logoUrl || "/placeholder.svg"}
+            src={logoUrl}
             alt="Logo do Curso"
             width={32}
             height={32}
@@ -52,7 +53,7 @@ export default function AISalesPage() {
         {/* Hero Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
           <Image
-            src={heroImageUrl || "/placeholder.svg"}
+            src={heroImageUrl}
             alt="Fundo de IA"
             layout="fill"
             objectFit="cover"
