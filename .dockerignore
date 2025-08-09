@@ -1,0 +1,25 @@
+# VCS e metadados
+.git
+.github
+.gitignore
+
+# IDEs/editores
+.vscode
+.idea
+
+# Dependências/cache locais
+node_modules
+.next/cache
+
+# Logs e artefatos
+npm-debug.log*
+yarn-error.log*
+*.log
+coverage
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+
+# Outros
+*.env 
